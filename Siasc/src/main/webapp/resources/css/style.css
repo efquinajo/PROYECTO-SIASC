@@ -1,0 +1,201 @@
+/********************
+ * GENERAL STYLES
+ ********************/
+
+/*------------------
+sm pequeño
+xs mediano
+lg grande
+--------------------*/
+.inputTextXs{
+  width: 215px !important;
+  text-transform: uppercase;
+}
+.inputTextLg{
+  width: 250px !important;
+  text-transform: uppercase;
+}
+.calendarXs>input{
+  width: 120px;
+}
+.calendarLg>input{
+  width: 180px !important;
+}
+.calendarLgG>input{
+  width: 250px !important;
+}
+.selectOneMenuXs{
+  width: 130px !important;
+}
+.selectOneMenuLg{
+  width: 190px !important;
+}
+.btnXs{
+  width: 100px !important;
+}
+/*-------------------------
+Diseño de los imput text
+------------------------------------*/
+.ui-inputfield {
+  border-bottom: solid 2px #87bcd6 !important;
+  border: solid 1px #c6d6df;
+  font-size: 14px;
+}
+
+.ui-fieldset-legend {
+  font-size: 13px !important;
+  line-height: 1px !important;
+  background-color: #0288d1 !important;
+}
+/*-------------------------------
+Imagenes personalizadas de iconos
+ -------------------------------*/
+.ui-icon-user{
+  background-image: url('../img/users.png')!important;
+  background-position: center center; !important;
+  width: 16px;
+  height: 16px;
+}
+
+.ui-icon-star{
+/*  background-image: url("#{request.contextPath}/resources/img/users.png") !important;*/
+  /*background-image: url("#{facesContext.externalContext.request.contextPath}/resources/img/entrar.png")!important;*/
+  background-image: url('../img/icons/login3.png')!important;
+  background-position: center center; !important;
+  width: 16px;
+  height: 16px;
+}
+
+.ui-icon-home{
+  background-image: url('../img/icons/home.png')!important;
+  background-position: center center; !important;
+  width: 24px;
+  height: 24px;
+}
+
+.ui-icon-directiva{
+  background-image: url('../img/icons/directiva1.png')!important;
+  background-position: center center; !important;
+  width: 24px;
+  height: 24px;
+}
+
+.ui-icon-colegiado{
+  background-image: url('../img/icons/colegiados.png')!important;
+  background-position: center center; !important;
+  width: 24px;
+  height: 24px;
+}
+.ui-icon-operaciones{
+  background-image: url('../img/icons/administracion.png')!important;
+  background-position: center center; !important;
+  width: 24px;
+  height: 24px;
+}
+.ui-icon-reporte{
+  background-image: url('../img/icons/report.png')!important;
+  background-position: center center; !important;
+  width: 24px;
+  height: 24px;
+}
+
+.ui-icon-acceso{
+  background-image: url('../img/icons/acceso.png')!important;
+  background-position: center center; !important;
+  width: 24px;
+  height: 24px;
+}
+
+.ui-icon-administracion{
+  background-image: url('../img/icons/ajustes.png')!important;
+  background-position: center center; !important;
+  width: 24px;
+  height: 24px;
+}
+
+.ui-icon-check{
+  background-image: url('../img/icons/check.png')!important;
+  background-position: center center; !important;
+  width: 16px;
+  height: 16px;
+}
+.ui-icon-new{
+  background-image: url('../img/icons/nuevodocumento.png')!important;
+  background-position: center center; !important;
+  width: 16px;
+  height: 16px;
+}
+.ui-icon-edit{
+  background-image: url('../img/icons/editdocumento.png')!important;
+  background-position: center center; !important;
+  width: 16px;
+  height: 16px;
+}
+.ui-icon-delete{
+  background-image: url('../img/icons/borrar2.png')!important;
+  background-position: center center; !important;
+  width: 16px;
+  height: 16px;
+}
+.ui-icon-admin{
+  background-image: url('../img/icons/administrar1.png')!important;
+  background-position: center center; !important;
+  width: 16px;
+  height: 16px;
+}
+.ui-icon-report{
+  background-image: url('../img/icons/pdf.png')!important;
+  background-position: center center; !important;
+  width: 16px;
+  height: 16px;
+}
+.ui-icon-search{
+  background-image: url('../img/icons/buscar.png')!important;
+  background-position: center center; !important;
+  width: 16px;
+  height: 16px;
+}
+.ui-icon-limpiar{
+  background-image: url('../img/icons/restablecer.png')!important;
+  background-position: center center; !important;
+  width: 16px;
+  height: 16px;
+}
+.ui-icon-dinero{
+  background-image: url('../img/icons/dinero2.png')!important;
+  background-position: center center; !important;
+  width: 32px;
+  height: 32px;
+}
+.ui-icon-volver{
+  background-image: url('../img/icons/volver.png')!important;
+  background-position: center center; !important;
+  width: 16px;
+  height: 16px;
+}
+.ui-icon-recibo{
+  background-image: url('../img/icons/recibo.png')!important;
+  background-position: center center; !important;
+  width: 16px;
+  height: 16px;
+}
+.card {
+   /* Add shadows to create the "card" effect */
+   box-shadow: 0 4px 12px 0 rgba(0,0,0,0.6);
+   transition: 0.3s;
+   border-radius: 5px; /* 5px rounded corners */
+   width: 150px;
+   height: 110px;
+ }
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.contentCard {
+  padding: 2px 16px;
+  margin-top: -15px;
+  border: none !important;
+}

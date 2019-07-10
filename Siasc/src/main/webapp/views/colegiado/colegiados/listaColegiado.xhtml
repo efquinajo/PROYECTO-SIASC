@@ -1,0 +1,106 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <table width="100%">
+        <tr>
+            <td align="left" width="80%">
+                <h2 align="center">#{msg['listaColegiados.title']}</h2>
+            </td>
+            <td align="right" width="20%">
+                <p:commandButton icon="#{msg['icon.reporte']}"
+                                 value="#{msg['btn.reporte']}"
+                                 update=":form"/>
+                <p:commandButton icon="#{msg['icon.nuevo']}"
+                                 value="#{msg['btn.nuevo']}"
+                                 action="#{colegiadosBean.nuevo}"
+                                 update=":form"/>
+            </td>
+        </tr>
+    </table>
+    <p:fieldset legend="#{msg['label.criteriosBusqueda']}">
+        <h:panelGrid columns="4" cellpadding="3">
+            <h:outputText value="#{msg['label.criterioBusqueda']} :"/>
+            <p:inputText value="#{colegiadosBean.criterioBusqueda}"
+                         styleClass="inputTextXs"/>
+            <h:outputText value="#{msg['label.criterioEstado']} :"/>
+            <p:selectOneMenu id="console" value="#{colegiadosBean.estado}"
+                             styleClass="selectOneMenuLg">
+                <f:selectItem itemLabel="#{msg['label.seleccione']}" itemValue=""/>
+                <f:selectItems value="#{colegiadosBean.listEstado}" />
+
+            </p:selectOneMenu>
+
+            <h:outputText value="#{msg['label.criterioFechaIni']} : (*)"/>
+            <p:calendar value="#{colegiadosBean.fechaIni}"
+                        showOn="button"
+                        pattern="#{msg['formatoFecha']}"
+                        mask="true"
+                        styleClass="calendarLg"
+            />
+            <h:outputText value="#{msg['label.criterioFechaFin']} : (*)"/>
+            <p:calendar value="#{colegiadosBean.fechaFin}"
+                        styleClass="calendarLg"
+                        showOn="button"
+                        pattern="#{msg['formatoFecha']}"
+                        mask="true"/>
+        </h:panelGrid>
+        <div align="center" style="margin-top: 17px;">
+            <p:commandButton value="#{msg['btn.buscar']}"
+                             styleClass="GreenButton RaisedButton"
+                             update=":form"/>
+            <p:commandButton icon="#{msg['icon.limpiar']}"
+                             value="#{msg['btn.limpiar']}"
+                             styleClass="RaisedButton"
+                             update=":form"/>
+
+        </div>
+    </p:fieldset>
+    <p:fieldset legend="#{msg['label.resultadosBusqueda']}">
+
+        <p:dataTable value="#{colegiadosBean.listColegiado}"
+                     var="colegiado"
+                     style="margin-bottom:0"
+                     rows="5"
+                     paginator="true"
+                     paginatorPosition="top"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15">
+            <p:column headerText="#{msg['colegiado.ci']}"
+                      width="10%"
+                      sortBy="#{colegiado.ci}">
+                <h:outputText value="#{colegiado.ci}"/>
+            </p:column>
+            <p:column headerText="#{msg['colegiado.matricula']}"
+                      width="10%"
+                      sortBy="#{colegiado.matricula}">
+                <h:outputText value="#{colegiado.matricula}"/>
+            </p:column>
+            <p:column headerText="#{msg['colegiado.nombreCompleto']}"
+                      width="45%"
+                      sortBy="#{colegiado.nombreCompleto}">
+                <h:outputText value="#{colegiado.nombreCompleto}"/>
+            </p:column>
+            <p:column headerText="#{msg['colegiado.cuotas']}"
+                      width="10%"
+                      sortBy="#{colegiado.examenTesis}">
+                <h:outputText value="#{colegiado.examenTesis}"/>
+            </p:column>
+            <p:column headerText="#{msg['colegiado.vigencia']}"
+                      width="10%"
+                      sortBy="#{colegiado.examenTesis}">
+                <h:outputText value="#{colegiado.examenTesis}"/>
+            </p:column>
+            <p:column headerText="#{msg['colegiado.estado']}"
+                      width="10%"
+                      sortBy="#{colegiado.examenTesis}">
+                <h:outputText value="#{colegiado.examenTesis}"/>
+            </p:column>
+            <f:facet name="footer">
+                #{colegiadosBean.listColegiado.size()}
+                #{msg['label.registrosEncontrados']}
+            </f:facet>
+        </p:dataTable>
+    </p:fieldset>
+</ui:composition>

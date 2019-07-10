@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-4.1.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+
+           http://www.springframework.org/schema/data/jpa
+           http://www.springframework.org/schema/data/jpa/spring-jpa.xsd"
+>
+
+    <!--<context:property-placeholder location="classpath:application.properties"/>-->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <!--<tx:annotation-driven proxy-target-class="true"/>-->
+
+    <!--Scans for @Service annotations and generates their beans -->
+    <context:component-scan base-package="com.comvetlp.bo.siasc.servicesImpl" />
+    <context:component-scan base-package="com.comvetlp.bo.siasc.services" />
+    <context:component-scan base-package="com.comvetlp.bo.siasc.bean" />
+
+    <!-- View scope -->
+    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+        <property name="scopes">
+            <map>
+                <entry key="view">
+                    <bean class="com.comvetlp.bo.siasc.scopes.ViewScope"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <!-- Create entity manager factory -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="webJpaFactory" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter"/>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="eclipselink.logging.level">FINE</prop>
+                <prop key="eclipselink.logging.parameters">true</prop>
+                <prop key="eclipselink.weaving">false</prop>
+                <prop key="databasePlatform">org.eclipse.persistence.platform.database.OraclePlatform</prop>
+            </props>
+        </property>
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan">
+            <array>
+                <value>com.comvetlp.bo.siasc.model</value>
+                <!--<value>bo.com.bmsc.gateway.edv.modelEdv.views</value>-->
+            </array>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/db_siasc?zeroDateTimeBehavior=convertToNull"/>
+        <property name="username" value="root"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <jpa:repositories base-package="com.comvetlp.bo.siasc.repositories"
+                      entity-manager-factory-ref="entityManagerFactory"/>
+
+    <!-- Configures Spring Data JPA and sets the base package of my DAOs. -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+</beans>

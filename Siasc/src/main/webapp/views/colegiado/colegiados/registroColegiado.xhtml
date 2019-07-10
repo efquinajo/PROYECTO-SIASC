@@ -1,0 +1,135 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <table width="100%">
+        <tr>
+            <td align="left" width="90%">
+                <h2 align="center">#{msg['listaColegiados.title.registrarColegiado']}</h2>
+            </td>
+            <td align="right" width="10%">
+                <p:commandButton icon="#{msg['icon.volver']}"
+                                 value="#{msg['btn.volver']}"
+                                 action="#{colegiadosBean.cargar}"
+                                 update=":form"/>
+            </td>
+        </tr>
+    </table>
+    <div align="center">
+        <table width="100%">
+            <tr>
+                <td align="left" width="30%">
+                    <h:panelGrid columns="1" cellpadding="9" style="width: 100%;">
+                        <f:facet name="header">
+                            <img src="#{request.contextPath}/resources/img/user1Xs.png"
+                                 alt="Klorofil Logo"
+                                 style="height: 150px;width: 150px;"/>
+                        </f:facet>
+                        <p:inputText value="#{colegiadosBean.colegiado.ci}"
+                                     placeholder="#{msg['colegiado.ci']}"
+                                     style="width: 80%;"/>
+                        <p:inputText value="#{colegiadosBean.colegiado.matricula}"
+                                     placeholder="#{msg['colegiado.matricula']}"
+                                     style="width: 80%;"
+                        />
+                        <p:calendar value="#{colegiadosBean.colegiado.fechaNacimiento}"
+                                    placeholder="#{msg['colegiado.fechaNacimiento']}"
+                                    styleClass="calendarLg"
+                                    showOn="button"
+                                    pattern="#{msg['formatoFecha']}"
+                                    mask="true"
+                        />
+                        <p:selectOneRadio id="genero" value="#{colegiadosBean.colegiado.genero}" unselectable="true">
+                            <f:selectItem itemLabel="#{msg['registraColegiado.label.masculino']}"
+                                          itemValue="#{colegiadosBean.tipoGenero.MASCULINO}"/>
+                            <f:selectItem itemLabel="#{msg['registraColegiado.label.femenino']}"
+                                          itemValue="#{colegiadosBean.tipoGenero.FEMENINO}"/>
+                        </p:selectOneRadio>
+
+                    </h:panelGrid>
+                </td>
+                <td align="right" width="30%">
+                    <h:panelGrid columns="1" cellpadding="9" style="width: 100%;">
+                        <p:inputText value="#{colegiadosBean.colegiado.grupoSanguineo}"
+                                     placeholder="#{msg['colegiado.grupoSanguineo']}"
+                                     style="width: 83%;"/>
+
+                        <p:inputText value="#{colegiadosBean.colegiado.domicilio}"
+                                     placeholder="#{msg['colegiado.domicilio']}"
+                                     style="width: 83%;"/>
+
+                        <p:inputText value="#{colegiadosBean.colegiado.universidadEgreso}"
+                                     placeholder="#{msg['colegiado.universidadEgreso']}"
+                                     style="width: 83%;"/>
+                        <p:inputText value="#{colegiadosBean.colegiado.fechaIngresoComvetlp}"
+                                     placeholder="#{msg['colegiado.fechaIngresoComvetlp']}"
+                                     style="width: 83%;"/>
+
+                        <p:inputText value="#{colegiadosBean.colegiado.costoInscripcion}"
+                                     id="costoInscripcion"
+                                     placeholder="#{msg['colegiado.costoInscripcion']} :"
+                                     style="width: 83%;"/>
+                        <p:tooltip for="costoInscripcion" trackMouse="true"
+                                   value="#{msg['listaColegiados.msg.costoInscripcion']}"/>
+
+                        <p:inputText value="#{colegiadosBean.colegiado.examenTesis}"
+                                     id="costoExamen"
+                                     placeholder="#{msg['colegiado.examenTesis']} :"
+                                     style="width: 83%;"/>
+                        <p:tooltip for="costoExamen" trackMouse="true"
+                                   value="#{msg['listaColegiados.msg.costoExamenTesis']}"/>
+
+                    </h:panelGrid>
+
+                </td>
+                <td align="right" width="40%">
+                    <h:panelGrid columns="2" style="width: 100%;" width="30%">
+
+                        <p:fieldset legend="#{msg['infoColegiado.fielset.title.telefonos']}"
+                                    style="height: 170px;">
+                            <p:commandButton icon="fa fa-plus Fs16 White TexAlLeft"
+                                             action="#{colegiadosBean.showFormRegistrarTelefono}"
+                                             update=":formRegistroTelefono"/>
+                            <p:dataScroller value="#{colegiadosBean.listTelefono}" var="telefono" chunkSize="3">
+                                <h:panelGrid columns="2" cellpadding="2">
+                                    <h:outputText value="#{telefono.telefonoa}"
+                                                  styleClass="outputLabelBold"/>
+                                    <h:outputText value="#{telefono.tipo.descripcion}"
+                                                  styleClass="outputLabelBold"/>
+                                </h:panelGrid>
+                            </p:dataScroller>
+                        </p:fieldset>
+
+                        <p:fieldset legend="#{msg['infoColegiado.fielset.title.idiomas']}"
+                                    style="height: 170px;">
+                            <p:commandButton icon="fa fa-plus Fs16 White"
+                                             action="#{colegiadosBean.showFormRegistrarIdioma}"
+                                             update=":formRegistroIdioma"/>
+                            <!--<p:scrollPanel style="height:70px;width:60px;border: none;font-size: 13px;">-->
+                            <p:dataScroller value="#{colegiadosBean.listHabla}" var="habla" chunkSize="3">
+                                <h:panelGrid columns="1" cellpadding="2">
+                                    <h:outputText value="#{habla.idIdioma.idiomaa}"
+                                                  styleClass="outputLabelBold"/>
+                                </h:panelGrid>
+                            </p:dataScroller>
+                            <!--</p:scrollPanel>-->
+                        </p:fieldset>
+
+                        <f:facet name="footer">
+                            <div align="center">
+                                <p:fieldset legend="#{msg['infoColegiado.fielset.title.correos']}"
+                                            style="width: 190px;height: 170px;">
+                                    <p:commandButton icon="fa fa-plus Fs16 White TexAlLeft"
+                                                     action="#{colegiadosBean.showFormRegistrarTelefono}"
+                                                     update=":formRegistroTelefono"/>
+                                </p:fieldset>
+                            </div>
+                        </f:facet>
+
+                    </h:panelGrid>
+                </td>
+            </tr>
+        </table>
+    </div>
+</ui:composition>

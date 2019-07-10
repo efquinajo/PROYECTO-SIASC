@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+
+        <div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card ShadowEffect">
+                    <h:form id="form">
+
+                        <h:panelGroup rendered="#{colegiadosBean.listaColegiadoForm}">
+                            <ui:include src="colegiados/listaColegiado.xhtml"/>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{colegiadosBean.registroColegiadoForm}">
+                            <ui:include src="colegiados/registroColegiado.xhtml"/>
+                        </h:panelGroup>
+
+                    </h:form>
+
+                    <!--Dialogos registroColegiadoForm-->
+
+                    <!--Dialogo formulario de registro de idioma-->
+                    <p:dialog header="#{msg['registraColegiado.dlg.head.registraIdioma']}"
+                              widgetVar="dlgRegistraIdioma"
+                              modal="true"
+                              resizable="false"
+                              draggable="false"
+                              responsive="true">
+                        <h:form id="formRegistroIdioma">
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank"
+                                         columnClasses="ui-grid-col-4,ui-grid-col-8">
+                                <h:outputLabel for="idioma" value="#{msg['idioma.idiomaa']} : (*)"/>
+                                <p:selectOneMenu id="idioma" value="#{colegiadosBean.tipoIdioma}"
+                                                 styleClass="selectOneMenuXs">
+                                    <f:selectItem itemLabel="#{msg['label.seleccione']}" itemValue=""/>
+                                    <f:selectItems value="#{colegiadosBean.listTipoIdioma}" />
+                                </p:selectOneMenu>
+                            </p:panelGrid>
+                            <br/>
+                            <div align="center">
+                                <p:commandButton value="Registrar"
+                                                 action="#{colegiadosBean.registrarIdioma}"
+                                                 update=":form"/>
+                            </div>
+                        </h:form>
+                    </p:dialog>
+                    <!--Dialogo formulario de registro de telefono-->
+                    <p:dialog header="#{msg['registraColegiado.dlg.head.registraTelefono']}"
+                              widgetVar="dlgRegistraTelefono"
+                              modal="true"
+                              resizable="false"
+                              draggable="false"
+                              responsive="true">
+                        <h:form id="formRegistroTelefono">
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank"
+                                         columnClasses="ui-grid-col-4,ui-grid-col-8">
+                                <h:outputLabel for="tipoTelefono" value="#{msg['telefono.tipo']} : (*)"/>
+                                <p:selectOneRadio id="tipoTelefono" value="#{colegiadosBean.telefono.tipoString}" unselectable="true">
+                                    <f:selectItem itemLabel="#{msg['registraColegiado.label.celular']}" itemValue="CELULAR"/>
+                                    <f:selectItem itemLabel="#{msg['registraColegiado.label.telefono']}" itemValue="TELEFONO"/>
+                                </p:selectOneRadio>
+
+                                <h:outputLabel for="telefono" value="#{msg['telefono.telefono']} : (*)"/>
+                                <h:inputText id="telefono" value="#{colegiadosBean.telefono.telefonoa}"/>
+                                <p:keyFilter for="telefono" mask="num"/>
+                            </p:panelGrid>
+                            <br/>
+                            <div align="center">
+                                <p:commandButton value="Registrar"
+                                                 action="#{colegiadosBean.registrarTelefono}"
+                                                 update=":form"/>
+                            </div>
+                        </h:form>
+                    </p:dialog>
+
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>
